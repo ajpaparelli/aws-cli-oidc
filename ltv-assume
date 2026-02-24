@@ -1,0 +1,37 @@
+#!/bin/sh
+
+if [ $1 = "clear-session" ]; then
+  unset AWS_REGION
+  unset AWS_ACCESS_KEY_ID
+  unset AWS_SECRET_ACCESS_KEY
+  unset AWS_SESSION_TOKEN
+  unset AWS_DEFAULT_REGION
+  echo "Cleared session"
+elif [ $1 = "setup" ]; then
+    unset AWS_REGION
+    unset AWS_ACCESS_KEY_ID
+    unset AWS_SECRET_ACCESS_KEY
+    unset AWS_SESSION_TOKEN
+    unset AWS_DEFAULT_REGION
+    aws-cli-oidc setup
+else
+    ASSUME_ROLE_OUTPUT=$(aws-cli-oidc get-cred "$@")
+IFS=' ' read AR_1 AR_2 AR_3 AR_4<< EOF
+   ${ASSUME_ROLE_OUTPUT}
+EOF
+
+
+    if [ ! "${AR_1}" = "None" ]; then
+      export AWS_ACCESS_KEY_ID="${AR_1}"
+    fi
+    if [ ! "${AR_2}" = "None" ]; then
+      export AWS_SECRET_ACCESS_KEY="${AR_2}"
+    fi
+    if [ ! "${AR_3}" = "None" ]; then
+      export AWS_SESSION_TOKEN="${AR_3}"
+    fi
+    if [ ! "${AR_4}" = "None" ]; then
+      export AWS_REGION="${AR_4}"
+      export AWS_DEFAULT_REGION="${AR_4}"
+    fi
+fi

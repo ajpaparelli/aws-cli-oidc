@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"os"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -104,10 +105,9 @@ func Authenticate(client *OIDCClient, roleArn string, maxSessionDurationSeconds 
 		fmt.Println(string(jsonBytes))
 	} else {
 		Writeln("")
-
-		Export("AWS_ACCESS_KEY_ID", awsCreds.AWSAccessKey)
-		Export("AWS_SECRET_ACCESS_KEY", awsCreds.AWSSecretKey)
-		Export("AWS_SESSION_TOKEN", awsCreds.AWSSessionToken)
+        var msg string
+        msg = fmt.Sprintf("%s %s %s %s\n", awsCreds.AWSAccessKey, awsCreds.AWSSecretKey, awsCreds.AWSSessionToken, "us-east-1")
+        fmt.Fprint(os.Stdout, msg)
 	}
 }
 

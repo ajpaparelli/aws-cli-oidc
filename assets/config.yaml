@@ -1,0 +1,32 @@
+llm-01:
+  aws_federation_type: saml2
+  client_auth_ca: ""
+  client_auth_cert: ""
+  client_auth_key: ""
+  client_id: account
+  client_secret: ""
+  default_iam_role_arn: ""
+  failure_redirect_url: ""
+  insecure_skip_verify: "false"
+  max_session_duration_seconds: "3600"
+  oidc_authentication_request_additional_query: ""
+  oidc_provider_metadata_url: https://keycloak.ltvops.com/realms/Production/.well-known/openid-configuration
+  oidc_provider_token_exchange_audience: ltvco-llm-01
+  oidc_provider_token_exchange_subject_token_type: urn:ietf:params:oauth:token-type:access_token
+  successful_redirect_url: ""
+production:
+  aws_federation_type: saml2
+  client_auth_ca: ""
+  client_auth_cert: ""
+  client_auth_key: ""
+  client_id: account
+  client_secret: ""
+  default_iam_role_arn: ""
+  failure_redirect_url: ""
+  insecure_skip_verify: "false"
+  max_session_duration_seconds: "3600"
+  oidc_authentication_request_additional_query: ""
+  oidc_provider_metadata_url: https://keycloak.ltvops.com/realms/Production/.well-known/openid-configuration
+  oidc_provider_token_exchange_audience: production
+  oidc_provider_token_exchange_subject_token_type: urn:ietf:params:oauth:token-type:access_token
+  successful_redirect_url: ""
